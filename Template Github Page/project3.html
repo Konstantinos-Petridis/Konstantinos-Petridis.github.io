@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Data Analytics Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<a href="index.html" class="logo"><strong>DATA ANALYTICS</strong> <span>PORTFOLIO</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="index.html#one">About Me</a></li>
+							<li><a href="index.html#two">Projects</a></li>
+							<li><a href="#footer">Contact</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main" class="alt">
+
+						<!-- Main Section -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h1>Project 3</h1>
+										<h2>Airbnb Data Analysis project</h2>
+									</header>
+								
+									<span class="image main">
+										<!-- Εικόνα για το Airbnb Project (π.χ. images/airbnb_project.jpg) -->
+										<img src="images/Airbnb.jpg" alt="Airbnb Data Analysis project" style="max-height: 350px; object-fit: cover;" />
+									</span>
+									
+									<h3>The Problem / Opportunity:</h3>
+									<p>This project focuses on performing Data Cleaning, Preprocessing, and Market Analysis on raw Airbnb datasets (Listings, Calendar, Reviews) for Athens, Greece, using Python (Pandas & NumPy). The primary objective was to build an end-to-end data processing pipeline to clean raw strings and currency metrics, handle missing values and anomalies, and derive strategic business metrics regarding market profitability, host volume, and pricing efficiency.</p>
+								
+									<h3>Usage Instructions:</h3>
+									<ul>
+										<li>Clone or download the repository to your local machine.</li>
+										<li>Ensure Python 3.x and the required libraries (<code>pandas</code>, <code>numpy</code>) are installed.</li>
+										<li>Open the <code>Airbnb_Data_Analysis.ipynb</code> file using Jupyter Notebook or Google Colab.</li>
+										<li>Run all cells sequentially to execute the data cleaning pipeline and output the structured metrics and DataFrames.</li>
+									</ul>
+
+									<h3>Data Source:</h3>
+									<ul>
+										<li>The datasets (<code>Listings.csv</code>, <code>Calendar.csv</code>, <code>Reviews.csv</code>) were provided as part of the "Python for Data Professionals" course by Data Tutor (<a href="https://datatutor.gr" target="_blank">datatutor.gr</a>).</li>
+										<li>The datasets contain detailed information about property listings, daily calendar booking status/prices, and guest reviews for the Athens area.</li>
+									</ul>
+
+									<h3>Corrections,Imputation and Calculations:</h3>
+									<ul>
+										<li><strong>Data Pipeline Robustness:</strong> Applied data formatting (removing <code>$</code>, <code>%</code>, <code>,</code>), implemented Mode Imputation for response metrics, and neutralized extreme booking placeholders (999 nights capped at 365 using <code>.clip()</code>).</li>
+										<li><strong>Most Profitable Areas:</strong> Isolated actual bookings (<code>available == 'f'</code>) to identify top-earning neighborhoods in Athens (e.g., Σταθμός Λαρίσης, Πεδίο Άρεως, Θησείο) based on average listing earnings.</li>
+										<li><strong>Host Review Volume:</strong> Aggregated review counts across properties to highlight the most dominant hosts and property managers driving market engagement.</li>
+										<li><strong>Pricing Strategy Efficiency:</strong> Developed a custom metric (<em>Revenue per Available Day</em>) using <code>np.where()</code> to prevent division-by-zero errors, revealing listings with optimal daily yields during active windows.</li>
+									</ul>
+
+									<h3>Business Recommendations:</h3>
+									<ul>
+										<li><strong>Strategic Investment:</strong> Property investors should focus on high-yield areas like Stathmos Larisis and Thissio, which show higher average listing revenues compared to saturated central zones.</li>
+										<li><strong>Pricing Optimization:</strong> Hosts should monitor <em>Revenue per Available Day</em> rather than raw daily rates to balance occupancy and maximize total revenue during active listing periods.</li>
+									</ul>
+
+									<h3>The Outcome:</h3>
+									<p>Created a complete Python data processing pipeline and exploratory data analysis notebook that transforms raw Airbnb data into clean, structured DataFrames and actionable strategic insights for short-term rental management.</p>
+								
+									<ul class="actions">
+										<li><a href="https://github.com/Konstantinos-Petridis/Airbnb-Data-Analysis-project" class="button next" target="_blank">See Code Here</a></li>
+									</ul>
+								</div>
+							</section>
+
+					</div>			
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="https://github.com/Konstantinos-Petridis" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="https://www.linkedin.com/in/konstantinos-petridis19/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+								<li><a href="mailto:konstantinos.petr19@gmail.com" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; Portfolio</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
