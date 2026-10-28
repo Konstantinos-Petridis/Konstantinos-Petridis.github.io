@@ -1,148 +1,201 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Data Analytics Portfolio</title>
-		<meta charset="utf-8" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Konstantinos Petridis — Data Analyst Portfolio</title>
+  <meta name="description" content="Data Analyst with a finance background. Projects in SQL, Power BI and Python." />
+  <meta property="og:title" content="Konstantinos Petridis — Data Analyst" />
+  <meta property="og:description" content="SQL, Power BI and Python projects turning data into business decisions." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --background: oklch(0.965 0.018 80);
+      --foreground: oklch(0.26 0.05 255);
+      --card: oklch(0.985 0.01 80);
+      --primary: oklch(0.31 0.065 255);
+      --primary-foreground: oklch(0.965 0.018 80);
+      --muted-foreground: oklch(0.48 0.035 255);
+      --accent: oklch(0.68 0.17 45);
+      --border: oklch(0.86 0.03 78);
+      --ink: oklch(0.27 0.06 255);
+      --ink-foreground: oklch(0.94 0.025 80);
+      --font-display: "Fraunces", Georgia, serif;
+      --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; border-color: var(--border); }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    .container { max-width: 72rem; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .accent { color: var(--accent); }
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+    /* Header */
+    header.site { display: flex; align-items: center; justify-content: space-between; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .brand { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; }
+    nav.main { display: flex; gap: 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-foreground); }
+    nav.main a:hover { color: var(--accent); }
 
-				<!-- Header -->
-					<header id="header" class="alt">
-						<a href="index.html" class="logo"><strong>DATA ANALYTICS</strong> <span>PORTFOLIO</span></a>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+    /* Hero */
+    .grid-paper {
+      background-image:
+        linear-gradient(rgba(20, 25, 45, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20, 25, 45, 0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero { padding-top: 6rem; padding-bottom: 9rem; }
+    .kicker { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); }
+    h1 { font-family: var(--font-display); font-weight: 500; font-size: 3rem; line-height: 1.05; max-width: 56rem; margin-top: 1.5rem; }
+    .hero p.lead { margin-top: 2rem; max-width: 36rem; font-size: 1.125rem; color: var(--muted-foreground); }
+    .cta-row { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn { display: inline-block; border-radius: 0.375rem; padding: 0.75rem 1.5rem; font-size: 0.875rem; font-weight: 500; border: 1px solid transparent; transition: all 0.2s; }
+    .btn-solid { background: var(--primary); color: var(--primary-foreground); }
+    .btn-solid:hover { background: var(--accent); }
+    .btn-outline { border-color: rgba(20, 25, 45, 0.3); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-				<!-- Menu -->
-					<nav id="menu">
-						<ul class="links">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="#one">About Me</a></li>
-							<li><a href="#two">Projects</a></li>
-							<li><a href="#footer">Contact</a></li>
-						</ul>
-					</nav>
+    /* Rise animation */
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .animate-rise { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+    .d1 { animation-delay: 120ms; } .d2 { animation-delay: 240ms; } .d3 { animation-delay: 360ms; }
 
+    /* Sections */
+    section.about { display: grid; gap: 3rem; padding-top: 6rem; padding-bottom: 6rem; }
+    h2 { font-family: var(--font-display); font-weight: 500; font-size: 2.25rem; }
+    .about-text { font-size: 1.125rem; line-height: 1.7; }
+    .about-text p + p { margin-top: 1.25rem; }
+    .muted { color: var(--muted-foreground); }
+    ul.skills { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; padding-top: 1rem; }
+    ul.skills li { border: 1px solid var(--border); background: var(--card); border-radius: 9999px; padding: 0.375rem 1rem; font-family: var(--font-mono); font-size: 0.75rem; }
 
-				<!-- Banner -->
-				<section id="banner" class="major">
-					<div class="inner">
-						<header class="major">
-							<h1><!-- Change here with a phrase like: Hello, this is [Konstantinos] [Petridis] --> Hello, I'm Konstantinos Petridis </h1>
-						</header>
-						<div class="content">
-							<p><!-- Change here with a phrase like: [Data Analyst] with expertise in [SQL,PYTHON, MICROSOFT POWER BI] – [a catching phrase] --> A Data Analyst with expertise in Microsoft Power BI, SQL, Python, Data Warehouses & Data Visualization</p>
-							<ul class="actions">
-								<li><a href="#one" class="button next scrolly">Learn More About Me</a></li>
-							</ul>
-						</div>
-					</div>
-				</section>
-	
+    /* Projects */
+    section.projects { background: var(--ink); color: var(--ink-foreground); padding-top: 6rem; padding-bottom: 6rem; }
+    .projects-head { display: flex; align-items: flex-end; justify-content: space-between; }
+    .projects-head .count { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+    .grid-3 { margin-top: 3rem; display: grid; gap: 2rem; }
+    .project { display: block; }
+    .project .frame { overflow: hidden; border-radius: 0.5rem; }
+    .project img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.5s; }
+    .project:hover img { transform: scale(1.05); }
+    .project .meta { margin-top: 1.25rem; display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .project .meta .n { color: var(--accent); }
+    .project .arrow { font-size: 1rem; transition: transform 0.2s, color 0.2s; }
+    .project:hover .arrow { transform: translate(2px, -2px); color: var(--accent); }
+    h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.5rem; margin-top: 0.5rem; }
+    .project p { margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.625; opacity: 0.75; }
 
-				<!-- Main -->
-					<div id="main">
+    /* Footer */
+    footer.site { padding-top: 6rem; padding-bottom: 6rem; }
+    footer.site h2 { font-size: 3rem; }
+    .links { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .link-btn { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(20, 25, 45, 0.3); border-radius: 0.375rem; padding: 0.75rem 1.25rem; font-size: 0.875rem; transition: all 0.2s; }
+    .link-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copyright { margin-top: 4rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-foreground); }
 
-						<!-- One -->
-						<section id="one">
-							<div class="inner">
-								<header class="major">
-									<h2>About Me</h2>
-								</header>
-								<!-- Change Here --> 
-								<p> <!-- A short intro for you, your educational background, maybe your professional experience so far. --> Finance background with a passion for data analysis.</p> 
-								<p> <!-- List out expertise in specific technologies, + some details about how you use these Technologies. --> My expertise on identifying key insights to support better business decisions and use Microsoft Power BI to present them visually. </p>
-								<p> <!-- A motivational quote that showcase your expertise and a reason for someone to hire you! ✨ --> As a professional Data Analyst, will provide the opportunity to work with a problem-solver, analytical mindset and someone that loves to share knowledge with people!</p>
-								<ul class="actions">
-									<li><a href="#two" class="button next">Projects</a></li>
-								</ul>
-							</div>
-						</section>
+    /* Responsive */
+    @media (min-width: 768px) {
+      h1 { font-size: 4.5rem; }
+      .hero { padding-top: 9rem; padding-bottom: 9rem; }
+      section.about { grid-template-columns: 1fr 2fr; }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+      footer.site h2 { font-size: 3.75rem; }
+    }
+    @media (max-width: 640px) {
+      header.site { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site container">
+    <a href="#top" class="brand">Konstantinos Petridis</a>
+    <nav class="main">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-						<!-- Two -->
-							<section id="two" class="tiles">
-								<article>
-									<span class="image">
-										<!-- Change link with image here (src). Do not forget to put the image on the images folder --> <img src="images/Sailor-Analysis.jpg" alt="Sailor Analysis Project" />
-									</span>
-									<header class="major">
-										<!-- Change the href= with the .html file that corresponds to the project. -->
-										<h3><a href="project1.html" class="link">Project 1</a></h3>
-										<h4><!-- Change here: Title of Project 1 -->Sailor Analysis in SQL </h4>
-									</header>
-								</article>
-								<!-- Copy this code and add as projects as you like --> 
-								
-								<!-- Project 2 -->
-								<article>
-									<span class="image">
-										<!-- Change link with image here (src). Do not forget to put the image on the images folder --> <img src="images/Uk_Train.jpg" alt="UK Train_Station Project" />
-									</span>
-									<header class="major">
-										<!-- Change the href= with the .html file that corresponds to the project. -->
-										<h3><a href="project2.html" class="link">Project 2</a></h3>
-										<h4><!-- Change here: Title of Project 1 -->UK Train_Station Project </h4>
-									</header>
-								</article>
-								
-									
-									<!-- Project 3 -->
-								<article>
-									<span class="image">
-										<!-- Change link with image here (src). Do not forget to put the image on the images folder --> <img src="images/Airbnb.jpg" alt="Airbnb Data Analysis project" />
-									</span>
-									<header class="major">
-										<!-- Change the href= with the .html file that corresponds to the project. -->
-										<h3><a href="project3.html" class="link">Project 3</a></h3>
-										<h4><!-- Change here: Title of Project 1 -->Airbnb Data Analysis project </h4>
-									</header>
-								</article>
-									
-									
-									
-								
-								<!-- <article>
-									<span class="image">
-										<img src="images/X.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="project2.html" class="link">Project-X</a></h3>
-										<h4>  </h4>
-									</header>
-								</article> --> 
-							</section>
+  <section id="top" class="grid-paper">
+    <div class="hero container">
+      <p class="kicker animate-rise">Data Analyst · Athens</p>
+      <h1 class="animate-rise d1">Turning raw numbers into <em class="accent">clear decisions.</em></h1>
+      <p class="lead animate-rise d2">Hi, I'm Konstantinos Petridis — a data analyst with a finance background, working in Power BI, SQL and Python.</p>
+      <div class="cta-row animate-rise d3">
+        <a href="#projects" class="btn btn-solid">View projects</a>
+        <a href="#contact" class="btn btn-outline">Get in touch</a>
+      </div>
+    </div>
+  </section>
 
-					</div>
+  <section id="about" class="about container">
+    <h2>About</h2>
+    <div class="about-text">
+      <p>Finance background with a passion for data analysis.</p>
+      <p class="muted">I focus on finding the key insights that support better business decisions, and presenting them visually with Microsoft Power BI.</p>
+      <p class="muted">A problem-solver with an analytical mindset who loves sharing knowledge with people.</p>
+      <ul class="skills">
+        <li>Microsoft Power BI</li>
+        <li>SQL</li>
+        <li>Python</li>
+        <li>Data Warehouses</li>
+        <li>Data Visualization</li>
+        <li>Finance</li>
+      </ul>
+    </div>
+  </section>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<ul class="icons">
-								<!-- Change here with your GitHub profile --> <li><a  href="https://github.com/Konstantinos-Petridis" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								<!-- Change here with your LinkedIn profile --> <li><a  href="https://www.linkedin.com/in/konstantinos-petridis19/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-								<!-- Change here with your Email --> <li><a  href="mailto:konstantinos.petr19@gmail.com" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
-							</ul>
-							<ul class="copyright">
-								<li>&copy; Porfolio</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</footer>
-			</div>
+  <section id="projects" class="projects">
+    <div class="container">
+      <div class="projects-head">
+        <h2>Selected projects</h2>
+        <span class="count">03 case studies</span>
+      </div>
+      <div class="grid-3">
+        <a class="project" href="https://konstantinos-petridis.github.io/project1.html">
+          <div class="frame"><img src="images/sailor.jpg" alt="Sailor Analysis project" loading="lazy" width="1280" height="960" /></div>
+          <div class="meta"><span class="n">01 — SQL</span><span class="arrow">↗</span></div>
+          <h3>Sailor Analysis</h3>
+          <p>Designed a relational database for sailor and charter data, validated it, and answered business questions with SQL.</p>
+        </a>
+        <a class="project" href="https://konstantinos-petridis.github.io/project2.html">
+          <div class="frame"><img src="images/train.jpg" alt="UK Train Stations project" loading="lazy" width="1280" height="960" /></div>
+          <div class="meta"><span class="n">02 — Power BI</span><span class="arrow">↗</span></div>
+          <h3>UK Train Stations</h3>
+          <p>Interactive dashboard of £741K revenue across 31,619 tickets — peak travel, ticket types and station demand.</p>
+        </a>
+        <a class="project" href="https://konstantinos-petridis.github.io/project3.html">
+          <div class="frame"><img src="images/airbnb.jpg" alt="Airbnb Athens project" loading="lazy" width="1280" height="960" /></div>
+          <div class="meta"><span class="n">03 — Python</span><span class="arrow">↗</span></div>
+          <h3>Airbnb Athens</h3>
+          <p>End-to-end cleaning pipeline with Pandas &amp; NumPy, plus market analysis of profitability, hosts and pricing.</p>
+        </a>
+      </div>
+    </div>
+  </section>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+  <footer id="contact" class="site container">
+    <h2>Let's work <em class="accent">together.</em></h2>
+    <div class="links">
+      <a href="https://github.com/Konstantinos-Petridis" target="_blank" rel="noreferrer" class="link-btn">GitHub</a>
+      <a href="https://www.linkedin.com/in/konstantinos-petridis19/" target="_blank" rel="noreferrer" class="link-btn">LinkedIn</a>
+      <a href="mailto:konstantinos.petr19@gmail.com" class="link-btn">Email</a>
+    </div>
+    <p class="copyright">© 2026 Konstantinos Petridis</p>
+  </footer>
+</body>
 </html>
