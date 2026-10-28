@@ -1,165 +1,164 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Data Analytics Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sailor Analysis — Konstantinos Petridis</title>
+<meta name="description" content="Designing a relational database for sailor and charter data, then extracting business insights through SQL queries." />
+<meta property="og:title" content="Sailor Analysis — SQL case study" /><meta property="og:description" content="Designing a relational database for sailor and charter data, then extracting business insights through SQL queries." />
+<meta property="og:type" content="article" /><meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+    :root {
+      --background: oklch(0.965 0.018 80);
+      --foreground: oklch(0.26 0.05 255);
+      --card: oklch(0.985 0.01 80);
+      --primary: oklch(0.31 0.065 255);
+      --primary-foreground: oklch(0.965 0.018 80);
+      --muted-foreground: oklch(0.48 0.035 255);
+      --accent: oklch(0.68 0.17 45);
+      --border: oklch(0.86 0.03 78);
+      --ink: oklch(0.27 0.06 255);
+      --ink-foreground: oklch(0.94 0.025 80);
+      --font-display: "Fraunces", Georgia, serif;
+      --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; border-color: var(--border); }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    .container { max-width: 72rem; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .accent { color: var(--accent); }
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+    /* Header */
+    header.site { display: flex; align-items: center; justify-content: space-between; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .brand { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; }
+    nav.main { display: flex; gap: 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-foreground); }
+    nav.main a:hover { color: var(--accent); }
 
+    /* Hero */
+    .grid-paper {
+      background-image:
+        linear-gradient(rgba(20, 25, 45, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20, 25, 45, 0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero { padding-top: 6rem; padding-bottom: 9rem; }
+    .kicker { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); }
+    h1 { font-family: var(--font-display); font-weight: 500; font-size: 3rem; line-height: 1.05; max-width: 56rem; margin-top: 1.5rem; }
+    .hero p.lead { margin-top: 2rem; max-width: 36rem; font-size: 1.125rem; color: var(--muted-foreground); }
+    .cta-row { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn { display: inline-block; border-radius: 0.375rem; padding: 0.75rem 1.5rem; font-size: 0.875rem; font-weight: 500; border: 1px solid transparent; transition: all 0.2s; }
+    .btn-solid { background: var(--primary); color: var(--primary-foreground); }
+    .btn-solid:hover { background: var(--accent); }
+    .btn-outline { border-color: rgba(20, 25, 45, 0.3); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-				<!-- Header -->
-					<header id="header" class="alt">
-						<a href="index.html" class="logo"><strong>DATA ANALYTICS</strong> <span>PORTFOLIO</span></a>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+    /* Rise animation */
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .animate-rise { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+    .d1 { animation-delay: 120ms; } .d2 { animation-delay: 240ms; } .d3 { animation-delay: 360ms; }
 
-				<!-- Menu -->
-					<nav id="menu">
-						<ul class="links">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="#one">About Me</a></li>
-							<li><a href="#two">Projects</a></li>
-							<li><a href="#footer">Contact</a></li>
-						</ul>
-					</nav>
+    /* Sections */
+    section.about { display: grid; gap: 3rem; padding-top: 6rem; padding-bottom: 6rem; }
+    h2 { font-family: var(--font-display); font-weight: 500; font-size: 2.25rem; }
+    .about-text { font-size: 1.125rem; line-height: 1.7; }
+    .about-text p + p { margin-top: 1.25rem; }
+    .muted { color: var(--muted-foreground); }
+    ul.skills { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; padding-top: 1rem; }
+    ul.skills li { border: 1px solid var(--border); background: var(--card); border-radius: 9999px; padding: 0.375rem 1rem; font-family: var(--font-mono); font-size: 0.75rem; }
 
-				<!-- Main -->
-					<div id="main" class="alt">
+    /* Projects */
+    section.projects { background: var(--ink); color: var(--ink-foreground); padding-top: 6rem; padding-bottom: 6rem; }
+    .projects-head { display: flex; align-items: flex-end; justify-content: space-between; }
+    .projects-head .count { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+    .grid-3 { margin-top: 3rem; display: grid; gap: 2rem; }
+    .project { display: block; }
+    .project .frame { overflow: hidden; border-radius: 0.5rem; }
+    .project img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.5s; }
+    .project:hover img { transform: scale(1.05); }
+    .project .meta { margin-top: 1.25rem; display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .project .meta .n { color: var(--accent); }
+    .project .arrow { font-size: 1rem; transition: transform 0.2s, color 0.2s; }
+    .project:hover .arrow { transform: translate(2px, -2px); color: var(--accent); }
+    h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.5rem; margin-top: 0.5rem; }
+    .project p { margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.625; opacity: 0.75; }
 
-						<!-- One -->
-							<section id="one">
-								<div class="inner">
-									<header class="major">
-										<h1><!-- Change here: Change the Project number -->Project-1</h1>
-										<h2><!-- Change here: Title of Project 1 --> Sailor Analysis in SQL</h2>
-									</header>
-								
-									<span class="image main">
-									<!--Change here: Image of the project (src) -->
-									<!-- Change here: Short Title of the Image (alt) -->
-									<img src="images/Sailor-1.jpg" alt="Sailor Analysis in SQL" style="max-height: 350px; object-fit: cover;" />
-									
-									<p><!-- Change here: Project Description --> 
-									<!-- Tip: Use <code> </code> in order to highlight as a code part of the text -->
-									</p>
-								
-									<h3>The Problem/Opportunity:</h3>
-									<p><!-- Change here: Describe the problem or opportunity of this project --> This project focuses on analyzing sailor and charter data using SQL.
-																												 The objective was to design a relational database and extract business insights
-																											     through SQL queries. </p>
-								
-								
-									<h4><!-- Change here: Step 1 of the Project Implementation -->Step 1: Designed the database schema based on the project requirements.</h4>
-									<p><!-- Change here: Describe the Step 1 of the Project Implementation --> Designed a relational database schema.
-Entities were identified and relationships between tables were defined.
-Primary keys and foreign keys were carefully selected to ensure data integrity and efficient querying  </p>
-								
-								<!-- Start: The rest of the steps. You can copy the code below as much times as the steps of the project -->
-									<h4><!-- Change here: Step 2(the rest of the steps) of the Project Implementation -->Step 2: Created tables and defined primary and foreign keys.</h4>
-									<p><!-- Change here: Describe the Step N of the Project Implementationt -->Using SQL Server Management Studio (SSMS), I created the database and all required tables.
-Constraints such as primary keys and foreign were implemented to enforce relationships between tables. </p>
-								<!-- End: The rest of the steps. You can copy the code below as much times as the steps of the project -->
-								
-								
-									<h4><!-- Change here: Step 2(the rest of the steps) of the Project Implementation -->Step 3: Inserted and validated data using SQL scripts.</h4>
-									
-									<p><!-- Change here: Describe the Step N of the Project Implementationt -->The provided datasets were inserted into the database using SQL scripts.
-Special attention was given to data types, null values, and formatting to ensure accurate data storage. </p>
+    /* Footer */
+    footer.site { padding-top: 6rem; padding-bottom: 6rem; }
+    footer.site h2 { font-size: 3rem; }
+    .links { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .link-btn { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(20, 25, 45, 0.3); border-radius: 0.375rem; padding: 0.75rem 1.25rem; font-size: 0.875rem; transition: all 0.2s; }
+    .link-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copyright { margin-top: 4rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-foreground); }
 
-
-
-									<h4><!-- Change here: Step 2(the rest of the steps) of the Project Implementation -->Step 4: Performed data quality checks and consistency validation.</h4>
-									<p><!-- Change here: Describe the Step N of the Project Implementationt --> After data insertion, validation queries were executed to verify record counts, detect missing values, and ensure referential integrity.</p>
-								
-								
-									<h4><!-- Change here: Step 2(the rest of the steps) of the Project Implementation -->Step 5: Data Exploration.</h4>
-									<p><!-- Change here: Describe the Step N of the Project Implementationt --> Exploratory SQL queries were written to better understand the structure and distribution of the data.</p>
-								
-									<h4><!-- Change here: Step 2(the rest of the steps) of the Project Implementation -->Step 6: Wrote SQL queries to answer business-related questions.</h4>
-									<p><!-- Change here: Describe the Step N of the Project Implementationt --> SQL queries were developed to answer specific business questions defined in the project.
-These queries involved joins, aggregations, filtering, and subqueries to extract meaningful insights from the data.</p>
-								
-									<h4><!-- Change here: Step 2(the rest of the steps) of the Project Implementation -->Step 7: Optimized queries using joins, subqueries, and aggregations.</h4>
-									<p><!-- Change here: Describe the Step N of the Project Implementationt --> Where necessary, queries were optimized for better performance by refining joins and minimizing unnecessary calculations.</p>
-								
-									<h4><!-- Change here: Step 2(the rest of the steps) of the Project Implementation -->Step 8: Insight Extraction.</h4>
-									<p><!-- Change here: Describe the Step N of the Project Implementationt --> The query results were analyzed and translated into business insights.
-Rather than focusing only on numbers, the findings were interpreted to explain trends and behaviors within the data.</p>
-															
-									<h4><!-- Change here: Step 2(the rest of the steps) of the Project Implementation -->Step 9: Documentation.</h4>
-									<p><!-- Change here: Describe the Step N of the Project Implementationt --> Finally, the project was documented by organizing SQL scripts, summarizing results and describing the analysis process.</p>
-								
-								
-								
-						
-								    <h4> Key Insights: </h4>
-											
-												<h4><!-- Change here: First Insight -->  </h4>
-											    <!-- Tip: If you don't want to create a bullet list, consider removing <ul>, </ul>, <li>, </li>.
-												1) <ul> is used for creating a list.
-												2) <li> is used for bullet points of a <ul> list. --> 
-												<ul>
-												<li><p><b><!-- Change here: Breakdown the insight to points --> Identified sailors who have chartered specific boats and those who never chartered certain boats, highlighting different usage behaviors</b> <!-- Change here: The paragraph of this bullet point --></p></li>
-												
-												<!-- Start: The rest of the bullet points. You can copy the code below as much times as the bullet points of this Insight of the project -->
-												<li><p><b><!-- Change here: Breakdown the insight to points --> Analyzed sailor activity based on boat characteristics, such as color, revealing preferences for specific types of boats</b> <!-- Change here: The paragraph of this bullet point --></p></li>
-												<!-- End: The rest of the bullet points. You can copy the code below as much times as the bullet points of this Insight of the project -->
-												</ul>
-											
-												<!-- Start: The rest of the Insights. You can copy the code below as much times as the insights found for the project -->
-												
-												<h4><!-- Change here: N Insight --> </h4>
-											    <ul>
-												<li><p><b><!-- Change here: Breakdown the insight to points --> Used pattern matching to identify sailors based on name characteristics, demonstrating advanced SQL filtering</b> <!-- Change here: The paragraph of this bullet point --></p></li>
-												
-												<!-- Start: The rest of the bullet points. You can copy the code below as much times as the bullet points of this Insight of the project -->
-												<li><p><b><!-- Change here: Breakdown the insight to points --> Combined data from multiple tables to provide complete charter history, including sailor names, boat IDs, and charter dates.</b> <!-- Change here: The paragraph of this bullet point --></p></li>
-												<!-- End: The rest of the bullet points. You can copy the code below as much times as the bullet points of this Insight of the project -->
-												
-												<!-- End: The rest of the Insights. You can copy the code below as much times as the insights found for the project -->
-												</ul>
-									<h3>The Outcome:</h3>
-									<p><!-- Change here: Describe the outcome of the problem/opportunity you solved/analyzed for this project --> Created a project that clearly demonstrates analytical thinking and SQL proficiency, making it suitable for inclusion in a professional GitHub portfolio.</p>
-								<ul class="actions">
-									     <li><!--Change here: Change the url of the repository --> <a href="https://github.com/Konstantinos-Petridis/sailor-sql-analysis" class="button next" target="_blank">See Code Here</a> 										 <li>
-								     </ul>
-								</div>
-							</section>
-
-					</div>			
-
-	<!-- Footer -->
-		<footer id="footer">
-				<div class="inner">
-					<ul class="icons">
-						<!-- Change here with your GitHub profile --> <li><a  href="https://github.com/Konstantinos-Petridis" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-						<!-- Change here with your LinkedIn profile --> <li><a  href="https://www.linkedin.com/in/konstantinos-petridis19/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-						<!-- Change here with your Email --> <li><a  href="mailto:konstantinos.petr19@gmail.com/" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
-					</ul>
-					<ul class="copyright">
-						<li>&copy; Porfolio</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</div>
-		</footer>
-
-</div>
-
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-
-</body>
-</html>
+    /* Responsive */
+    @media (min-width: 768px) {
+      h1 { font-size: 4.5rem; }
+      .hero { padding-top: 9rem; padding-bottom: 9rem; }
+      section.about { grid-template-columns: 1fr 2fr; }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+      footer.site h2 { font-size: 3.75rem; }
+    }
+    @media (max-width: 640px) {
+      header.site { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+    }
+  </style>
+<style>
+.case{padding-top:4rem;padding-bottom:5rem}
+.back{font-family:var(--font-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted-foreground)}
+.back:hover{color:var(--accent)}
+.case h1{font-size:2.75rem}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.chips li{border:1px solid var(--border);background:var(--card);border-radius:9999px;padding:.3rem .9rem;font-family:var(--font-mono);font-size:.75rem}
+.cover{margin-top:3rem;border-radius:.5rem;overflow:hidden;border:1px solid var(--border)}
+.cover img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.body{display:grid;gap:3rem;margin-top:4rem}
+.block h2{font-size:1.6rem;margin-bottom:1rem}
+.block p,.block li{font-size:1.05rem;line-height:1.7}
+.block ul{padding-left:1.2rem}.block li+li{margin-top:.6rem}
+.block li::marker{color:var(--accent)}
+.steps{list-style:none;padding:0!important;counter-reset:s}
+.steps li{border-top:1px solid var(--border);padding:1rem 0;display:grid;grid-template-columns:3rem 1fr;gap:1rem}
+.steps li b{display:block;font-family:var(--font-display);font-weight:500;font-size:1.15rem}
+.steps .n{font-family:var(--font-mono);color:var(--accent);font-size:.85rem;padding-top:.2rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:1rem}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:.5rem;padding:1.25rem}
+.stat b{display:block;font-family:var(--font-display);font-size:2rem;font-weight:500;color:var(--primary)}
+.stat span{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted-foreground)}
+.outcome{background:var(--ink);color:var(--ink-foreground);border-radius:.75rem;padding:2.5rem}
+.outcome .btn{margin-top:1.5rem;background:var(--accent);color:var(--ink)}
+code{font-family:var(--font-mono);font-size:.9em;background:var(--card);border:1px solid var(--border);border-radius:.25rem;padding:0 .3rem}
+.next{display:flex;justify-content:space-between;gap:1rem;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em}
+.next a:hover{color:var(--accent)}
+@media(min-width:768px){.case h1{font-size:4rem}.body{grid-template-columns:1fr 2fr}.body .full{grid-column:1/-1}}
+</style>
+</head><body>
+<header class="site container"><a href="index.html" class="brand">Konstantinos Petridis</a>
+<nav class="main"><a href="index.html#about">About</a><a href="index.html#projects">Projects</a><a href="index.html#contact">Contact</a></nav></header>
+<section class="grid-paper"><div class="container case">
+<a class="back" href="index.html#projects">← All projects</a>
+<p class="kicker animate-rise" style="margin-top:2rem">01 — SQL case study</p>
+<h1 class="animate-rise d1">Sailor Analysis</h1>
+<p class="lead muted animate-rise d2" style="margin-top:1.5rem;max-width:40rem;font-size:1.15rem">Designing a relational database for sailor and charter data, then extracting business insights through SQL queries.</p>
+<ul class="chips animate-rise d3"><li>SQL Server</li><li>SSMS</li><li>Joins</li><li>Subqueries</li><li>Aggregations</li></ul>
+</div></section>
+<main class="container" style="padding-bottom:5rem">
+<div class="cover"><img src="images/sailor.jpg" alt="Sailor Analysis project" width="1280" height="960" /></div>
+<div class="body"><div class="block full"><h2>The problem</h2><p>This project analyses sailor and charter data using SQL. The objective was to design a relational database and extract business insights through SQL queries.</p></div><div class="block full"><h2>Process</h2><ol class="steps"><li><span class="n">01</span><div><b>Schema design</b><span class="muted">Identified entities and relationships, and chose primary and foreign keys for data integrity and efficient querying.</span></div></li><li><span class="n">02</span><div><b>Tables &amp; keys</b><span class="muted">Created the database and all tables in SQL Server Management Studio, enforcing relationships with constraints.</span></div></li><li><span class="n">03</span><div><b>Data loading</b><span class="muted">Inserted the datasets with SQL scripts, paying attention to data types, nulls and formatting.</span></div></li><li><span class="n">04</span><div><b>Quality checks</b><span class="muted">Verified record counts, detected missing values and confirmed referential integrity.</span></div></li><li><span class="n">05</span><div><b>Exploration</b><span class="muted">Wrote exploratory queries to understand the structure and distribution of the data.</span></div></li><li><span class="n">06</span><div><b>Business questions</b><span class="muted">Answered the defined questions with joins, aggregations, filtering and subqueries.</span></div></li><li><span class="n">07</span><div><b>Optimisation</b><span class="muted">Refined joins and removed unnecessary calculations for better performance.</span></div></li><li><span class="n">08</span><div><b>Insight extraction</b><span class="muted">Interpreted results to explain trends and behaviours, not just numbers.</span></div></li><li><span class="n">09</span><div><b>Documentation</b><span class="muted">Organised the SQL scripts, summarised results and described the process.</span></div></li></ol></div><div class="block full"><h2>Key insights</h2><ul><li>Identified sailors who chartered specific boats — and those who never did — highlighting different usage behaviours.</li><li>Analysed activity by boat characteristics such as colour, revealing preferences for certain boat types.</li><li>Used pattern matching to find sailors by name characteristics, demonstrating advanced SQL filtering.</li><li>Combined multiple tables into a complete charter history: sailor names, boat IDs and charter dates.</li></ul></div>
+<div class="outcome full"><p class="kicker">The outcome</p><h2 style="margin-top:1rem;font-size:1.75rem;line-height:1.3">A project that clearly demonstrates analytical thinking and SQL proficiency.</h2>
+<a class="btn" href="https://github.com/Konstantinos-Petridis/sailor-sql-analysis" target="_blank" rel="noreferrer">See the code on GitHub ↗</a></div></div>
+<div class="next"><a href="project3.html">← Airbnb Athens</a><a href="project2.html">UK Train Stations →</a></div>
+</main>
+<footer class="site container" style="padding-top:2rem"><p class="copyright">© 2026 Konstantinos Petridis</p></footer>
+</body></html>

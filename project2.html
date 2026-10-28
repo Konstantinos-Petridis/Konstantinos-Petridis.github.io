@@ -1,118 +1,164 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Data Analytics Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UK Train Stations — Konstantinos Petridis</title>
+<meta name="description" content="An interactive Power BI dashboard uncovering revenue patterns, peak travel behaviour and passenger distribution across UK stations." />
+<meta property="og:title" content="UK Train Stations — Power BI case study" /><meta property="og:description" content="An interactive Power BI dashboard uncovering revenue patterns, peak travel behaviour and passenger distribution across UK stations." />
+<meta property="og:type" content="article" /><meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+    :root {
+      --background: oklch(0.965 0.018 80);
+      --foreground: oklch(0.26 0.05 255);
+      --card: oklch(0.985 0.01 80);
+      --primary: oklch(0.31 0.065 255);
+      --primary-foreground: oklch(0.965 0.018 80);
+      --muted-foreground: oklch(0.48 0.035 255);
+      --accent: oklch(0.68 0.17 45);
+      --border: oklch(0.86 0.03 78);
+      --ink: oklch(0.27 0.06 255);
+      --ink-foreground: oklch(0.94 0.025 80);
+      --font-display: "Fraunces", Georgia, serif;
+      --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; border-color: var(--border); }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    .container { max-width: 72rem; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .accent { color: var(--accent); }
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+    /* Header */
+    header.site { display: flex; align-items: center; justify-content: space-between; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .brand { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; }
+    nav.main { display: flex; gap: 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-foreground); }
+    nav.main a:hover { color: var(--accent); }
 
-				<!-- Header -->
-					<header id="header" class="alt">
-						<a href="index.html" class="logo"><strong>DATA ANALYTICS</strong> <span>PORTFOLIO</span></a>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+    /* Hero */
+    .grid-paper {
+      background-image:
+        linear-gradient(rgba(20, 25, 45, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20, 25, 45, 0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero { padding-top: 6rem; padding-bottom: 9rem; }
+    .kicker { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); }
+    h1 { font-family: var(--font-display); font-weight: 500; font-size: 3rem; line-height: 1.05; max-width: 56rem; margin-top: 1.5rem; }
+    .hero p.lead { margin-top: 2rem; max-width: 36rem; font-size: 1.125rem; color: var(--muted-foreground); }
+    .cta-row { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn { display: inline-block; border-radius: 0.375rem; padding: 0.75rem 1.5rem; font-size: 0.875rem; font-weight: 500; border: 1px solid transparent; transition: all 0.2s; }
+    .btn-solid { background: var(--primary); color: var(--primary-foreground); }
+    .btn-solid:hover { background: var(--accent); }
+    .btn-outline { border-color: rgba(20, 25, 45, 0.3); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-				<!-- Menu -->
-					<nav id="menu">
-						<ul class="links">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="index.html#one">About Me</a></li>
-							<li><a href="index.html#two">Projects</a></li>
-							<li><a href="#footer">Contact</a></li>
-						</ul>
-					</nav>
+    /* Rise animation */
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .animate-rise { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+    .d1 { animation-delay: 120ms; } .d2 { animation-delay: 240ms; } .d3 { animation-delay: 360ms; }
 
-				<!-- Main -->
-					<div id="main" class="alt">
+    /* Sections */
+    section.about { display: grid; gap: 3rem; padding-top: 6rem; padding-bottom: 6rem; }
+    h2 { font-family: var(--font-display); font-weight: 500; font-size: 2.25rem; }
+    .about-text { font-size: 1.125rem; line-height: 1.7; }
+    .about-text p + p { margin-top: 1.25rem; }
+    .muted { color: var(--muted-foreground); }
+    ul.skills { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; padding-top: 1rem; }
+    ul.skills li { border: 1px solid var(--border); background: var(--card); border-radius: 9999px; padding: 0.375rem 1rem; font-family: var(--font-mono); font-size: 0.75rem; }
 
-						<!-- Main Section -->
-							<section id="one">
-								<div class="inner">
-									<header class="major">
-										<h1>Project 2</h1>
-										<h2>UK Train Station Project (Power BI)</h2>
-									</header>
-								
-									<span class="image main">
-										<!-- Change here: Short Title of the Image (alt) -->
-										<img src="images/Uk_Train.jpg" alt="UK Train Station Project" style="max-height: 350px; object-fit: cover;" />
+    /* Projects */
+    section.projects { background: var(--ink); color: var(--ink-foreground); padding-top: 6rem; padding-bottom: 6rem; }
+    .projects-head { display: flex; align-items: flex-end; justify-content: space-between; }
+    .projects-head .count { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+    .grid-3 { margin-top: 3rem; display: grid; gap: 2rem; }
+    .project { display: block; }
+    .project .frame { overflow: hidden; border-radius: 0.5rem; }
+    .project img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.5s; }
+    .project:hover img { transform: scale(1.05); }
+    .project .meta { margin-top: 1.25rem; display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .project .meta .n { color: var(--accent); }
+    .project .arrow { font-size: 1rem; transition: transform 0.2s, color 0.2s; }
+    .project:hover .arrow { transform: translate(2px, -2px); color: var(--accent); }
+    h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.5rem; margin-top: 0.5rem; }
+    .project p { margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.625; opacity: 0.75; }
 
-									</span>
-									
-									<h3>The Problem / Opportunity:</h3>
-									<p>This project focuses on analyzing UK railway ticket sales and station usage using Microsoft Power BI. The objective was to build an interactive dashboard to uncover revenue patterns, peak travel behavior, and passenger distribution across stations.</p>
-								
-									<h3>Installation & Usage Instructions:</h3>
-									<ul>
-										<li>Download and open the file using Microsoft Power BI Desktop.</li>
-										<li>Explore the dashboards and visualizations that have been created.</li>
-										<li>Use the available slicers to filter the data based on date, station, or ticket type.</li>
-										<li>Navigate the map to view sales per station and see additional information through tooltips.</li>
-									</ul>
+    /* Footer */
+    footer.site { padding-top: 6rem; padding-bottom: 6rem; }
+    footer.site h2 { font-size: 3rem; }
+    .links { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .link-btn { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(20, 25, 45, 0.3); border-radius: 0.375rem; padding: 0.75rem 1.25rem; font-size: 0.875rem; transition: all 0.2s; }
+    .link-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copyright { margin-top: 4rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-foreground); }
 
-									<h3>Data Source:</h3>
-									<ul>
-										<li>The data source is: <a href="https://mavenanalytics.io/data-playground" target="_blank">Maven Analytics Data Playground</a>, while the development of the Data Model was created by Data Tutor (<a href="https://datatutor.gr" target="_blank">datatutor.gr</a>).</li>
-										<li>Finally, this report (specifically the Data Model part) was created by following the Guided Project course in Microsoft Power BI by Data Tutor.</li>
-									</ul>
-
-									<h3>Key Insights:</h3>
-									<ul>
-										<li>The data shows a total revenue of £741K from 31,619 tickets over the period December 2023 - April 2024 with an average price of £23.44. This indicates a relatively affordable pricing structure.</li>
-										<li>Advance-ticket type has the highest share (42%), suggesting that a significant portion of customers prefer booking in advance to secure lower prices.</li>
-										<li>Revenues appear relatively stable after mid-March, due to the normalization of travel patterns.</li>
-									</ul>
-
-									<h3>Business Recommendations:</h3>
-									<ul>
-										<li>Develop targeted strategies to improve under-performing stations.</li>
-										<li>Promote off-peak tickets to balance passenger distribution and reduce congestion.</li>
-									</ul>
-
-									<h3>The Outcome:</h3>
-									<p>Created an interactive Power BI report that transforms raw railway data into actionable business insights, helping optimize station management and ticket pricing strategies.</p>
-								
-									<ul class="actions">
-										<!-- Change here: Change the url of the repository -->
-										<li><a href="https://github.com/Konstantinos-Petridis/UK-Train-Station-Power-BI-Project" class="button next" target="_blank">See Code Here</a></li>
-									</ul>
-								</div>
-							</section>
-
-					</div>			
-
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<ul class="icons">
-								<li><a href="https://github.com/Konstantinos-Petridis" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								<li><a href="https://www.linkedin.com/in/konstantinos-petridis19/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-								<li><a href="mailto:konstantinos.petr19@gmail.com" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
-							</ul>
-							<ul class="copyright">
-								<li>&copy; Portfolio</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</footer>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
-</html>
+    /* Responsive */
+    @media (min-width: 768px) {
+      h1 { font-size: 4.5rem; }
+      .hero { padding-top: 9rem; padding-bottom: 9rem; }
+      section.about { grid-template-columns: 1fr 2fr; }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+      footer.site h2 { font-size: 3.75rem; }
+    }
+    @media (max-width: 640px) {
+      header.site { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+    }
+  </style>
+<style>
+.case{padding-top:4rem;padding-bottom:5rem}
+.back{font-family:var(--font-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted-foreground)}
+.back:hover{color:var(--accent)}
+.case h1{font-size:2.75rem}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.chips li{border:1px solid var(--border);background:var(--card);border-radius:9999px;padding:.3rem .9rem;font-family:var(--font-mono);font-size:.75rem}
+.cover{margin-top:3rem;border-radius:.5rem;overflow:hidden;border:1px solid var(--border)}
+.cover img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.body{display:grid;gap:3rem;margin-top:4rem}
+.block h2{font-size:1.6rem;margin-bottom:1rem}
+.block p,.block li{font-size:1.05rem;line-height:1.7}
+.block ul{padding-left:1.2rem}.block li+li{margin-top:.6rem}
+.block li::marker{color:var(--accent)}
+.steps{list-style:none;padding:0!important;counter-reset:s}
+.steps li{border-top:1px solid var(--border);padding:1rem 0;display:grid;grid-template-columns:3rem 1fr;gap:1rem}
+.steps li b{display:block;font-family:var(--font-display);font-weight:500;font-size:1.15rem}
+.steps .n{font-family:var(--font-mono);color:var(--accent);font-size:.85rem;padding-top:.2rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:1rem}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:.5rem;padding:1.25rem}
+.stat b{display:block;font-family:var(--font-display);font-size:2rem;font-weight:500;color:var(--primary)}
+.stat span{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted-foreground)}
+.outcome{background:var(--ink);color:var(--ink-foreground);border-radius:.75rem;padding:2.5rem}
+.outcome .btn{margin-top:1.5rem;background:var(--accent);color:var(--ink)}
+code{font-family:var(--font-mono);font-size:.9em;background:var(--card);border:1px solid var(--border);border-radius:.25rem;padding:0 .3rem}
+.next{display:flex;justify-content:space-between;gap:1rem;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em}
+.next a:hover{color:var(--accent)}
+@media(min-width:768px){.case h1{font-size:4rem}.body{grid-template-columns:1fr 2fr}.body .full{grid-column:1/-1}}
+</style>
+</head><body>
+<header class="site container"><a href="index.html" class="brand">Konstantinos Petridis</a>
+<nav class="main"><a href="index.html#about">About</a><a href="index.html#projects">Projects</a><a href="index.html#contact">Contact</a></nav></header>
+<section class="grid-paper"><div class="container case">
+<a class="back" href="index.html#projects">← All projects</a>
+<p class="kicker animate-rise" style="margin-top:2rem">02 — Power BI case study</p>
+<h1 class="animate-rise d1">UK Train Stations</h1>
+<p class="lead muted animate-rise d2" style="margin-top:1.5rem;max-width:40rem;font-size:1.15rem">An interactive Power BI dashboard uncovering revenue patterns, peak travel behaviour and passenger distribution across UK stations.</p>
+<ul class="chips animate-rise d3"><li>Power BI</li><li>DAX</li><li>Data modelling</li><li>Maps</li></ul>
+</div></section>
+<main class="container" style="padding-bottom:5rem">
+<div class="cover"><img src="images/train.jpg" alt="UK Train Stations project" width="1280" height="960" /></div>
+<div class="body"><div class="block full"><div class="stats"><div class="stat"><b>£741K</b><span>Total revenue</span></div><div class="stat"><b>31,619</b><span>Tickets sold</span></div><div class="stat"><b>£23.44</b><span>Average price</span></div><div class="stat"><b>42%</b><span>Advance tickets</span></div></div></div><div class="block "><h2>The problem</h2><p>Analysing UK railway ticket sales and station usage in Microsoft Power BI, to build an interactive dashboard of revenue patterns, peak travel and passenger distribution.</p></div><div class="block "><h2>Key insights</h2><ul><li>Total revenue of £741K from 31,619 tickets between December 2023 and April 2024, at an average of £23.44 — a relatively affordable pricing structure.</li><li>Advance tickets hold the largest share (42%): many customers book ahead to secure lower prices.</li><li>Revenue is relatively stable after mid-March as travel patterns normalise.</li></ul></div><div class="block "><h2>Recommendations</h2><ul><li>Develop targeted strategies to improve under-performing stations.</li><li>Promote off-peak tickets to balance passenger distribution and reduce congestion.</li></ul></div><div class="block "><h2>How to use</h2><ul><li>Open the file in Microsoft Power BI Desktop.</li><li>Explore the dashboards and visualisations.</li><li>Use slicers to filter by date, station or ticket type.</li><li>Navigate the map for sales per station, with extra detail in tooltips.</li></ul></div><div class="block "><h2>Data source</h2><p>Data from the <a class="accent" href="https://mavenanalytics.io/data-playground" target="_blank" rel="noreferrer">Maven Analytics Data Playground</a>. The data model follows the Guided Project course in Power BI by <a class="accent" href="https://datatutor.gr/" target="_blank" rel="noreferrer">Data Tutor</a>.</p></div>
+<div class="outcome full"><p class="kicker">The outcome</p><h2 style="margin-top:1rem;font-size:1.75rem;line-height:1.3">An interactive Power BI report that turns raw railway data into actionable insights for station management and ticket pricing.</h2>
+<a class="btn" href="https://github.com/Konstantinos-Petridis/UK-Train-Station-Power-BI-Project" target="_blank" rel="noreferrer">See the code on GitHub ↗</a></div></div>
+<div class="next"><a href="project1.html">← Sailor Analysis</a><a href="project3.html">Airbnb Athens →</a></div>
+</main>
+<footer class="site container" style="padding-top:2rem"><p class="copyright">© 2026 Konstantinos Petridis</p></footer>
+</body></html>
